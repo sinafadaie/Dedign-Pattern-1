@@ -1,0 +1,21 @@
+Mosh use Interface instead of abstract class,
+what is the difference?
+they are both abstract concept, we can not instantiate them.
+so we can build loosely coupled application (because we can't instantiate them)
+
+we prefer an abstract class
+if we want to provide some common code to all the child classes.
+(we write some code on abstract class, and all the child will inheritance it)
+now in this problem, we are not providing any common code to our tools
+so we use Interface!
+
+--------------------------------
+
+using State pattern
+tend our code to "Open Closed Principle" on OOP
+our classes should be open for extension
+closed for modification.
+with "State" we can add new functionality without changing the existing code.
+with if/else we need modify our code to add some functionality!
+(Open Close principle means
+ we don't break our old code when we our extending our code)

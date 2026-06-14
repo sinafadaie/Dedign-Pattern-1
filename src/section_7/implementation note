@@ -1,0 +1,31 @@
+Note: we want to make some implementation on Task
+      so we use abstract class instead of an Interface!
+      Task is our Template
+
+Note: we have two constructor on Task class (Mosh version)
+      one of them is default (with no parameter)
+      one of them with AuditTrail parameter
+      can share an audit trial obj amongst any different tasks
+      even we can use it for developing an interface
+      to decouple AuditTrail from Task class later!
+
+Note: by creating an any subTask classes obj (like TransferMoneyTask)                 public Task() {
+      Java runtime is going to call the default constructor of task class             this.auditTrail = new AuditTrail();
+       (so there we instantiate AuditTrail obj)                                         }
+
+Note: I implement a abstract class with no abstract method!
+      Mosh create a abstract class with a abstract method!
+
+important note: if main class has access to doExecute()
+                we can do task without AuditTrial (it's not correct)
+                we can not make doExecute() private on subclasses
+                (access modifier could not be private on subclasses, but public on parent!)
+                we can not make doExecute() private on Task
+                (the method can not be inheritance by subclasses)
+
+                solution: use protected access modifier
+                          it's like private, but visible to "subclasses"
+
+
+
+

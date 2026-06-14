@@ -1,0 +1,53 @@
+with this pattern we build a PIPELINE or chain of responsibility.
+we do this when we want to implement some steps ordinary
+like a funnel,pipeline,...
+like a user com to our website, and he need pass some steps
+
+we create a chain by classes
+every class know about next classes (just next classes)
+it's like link list structure on classes!
+each node reference to next node.
+
+                                                       ABSTRACT CLASS
+┌──────────────────────┐                           ┌──────────────────────┐
+│      WebServer       │                           │       Handler        │────── next ──────┐
+├──────────────────────┤ ◆───────────────────────► ├──────────────────────┤                  │
+│   handle(request)    │                           │       handle()       │◄─────────────────┘
+└──────────────────────┘                           └──────────────────────┘
+                                                               ▲
+                                                               │
+                                    ┌──────────────────────────┴─────────────────────────┐
+                                    │                                                    │
+                        ┌──────────────────────┐                             ┌──────────────────────┐
+                        │    Authenticator     │                             │       Logger         │
+                        ├──────────────────────┤                             ├──────────────────────┤
+                        │                      │                             │                      │
+                        └──────────────────────┘                             └──────────────────────┘
+
+
+WE PUT ORDERS ON MAIN CLASS!
+how?
+we create a field as (next)
+on every handler with type of Handler class
+and when instantiate each handler, we tell him who is next!
+so we need polymorphism on this field!
+
+Note: we put some "recursive logic" on our abstract class
+      if we have next, call himself!
+      so we need abstract class (we need some implementation)
+      not a interface
+
+Note: we link handler obj on main class
+      so if we add or remove a step
+      we don't need modify other codes
+      so we respect open close!
+
+Note: we start our chain from compressor,
+      because it's at he end!
+      and we don't need pass him another handler
+      so we move reversely.
+
+Note: we use both POLYMORPHISM & INHERITANCE
+      polymorphism to store first handler obj on webserver class
+      and each handler store next handler
+      inheritance to create handler objects

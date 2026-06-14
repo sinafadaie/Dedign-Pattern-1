@@ -1,0 +1,83 @@
+another benefit of the command pattern is that it gives us
+the ability to implement undo mechanisms.
+we want to develop a "Note application"
+with a button to BOLD text!
+
+1.we create "new Interface" and extend it to our Command interface,                         +------------------------+
+  (UndoableCommand Interface)                                                               |        Command         |
+  this interface has unexecute() method                                                     |     <<interface>>      |
+  (it has execute() method to, because he extended to Command interface)                    +------------------------+
+                                                                                            | + execute()            |
+                                                                                            +------------------------+
+Note: we need new interface (we can't add unexecute() to Command interface)                             ^
+      because some actions are not undoable                                                             |
+      we can't unsave, after saving file!                                                               | extends
+                                                                                                        |
+                                                                                            +------------------------+
+                                                                                            |    UndoableCommand     |
+                                                                                            |     <<interface>>      |
+                                                                                            +------------------------+
+                                                                                            | + unexecute()          |
+                                                                                            +------------------------+
+                                                                                                        ^
+Note: what is the difference between the "MEMENTO" & "COMMAND"                                          |
+      when it comes to undo operations?                                                                 | implements
+      in the memento we store multiple snapshot over time                                               |
+      some times these snapshot get so expensive!                                           +------------------------+
+      like we have video editor, snapshots of video is so large!                            | Concrete implementation|
+      (in memento we get snapshot from whole obj)                                           +------------------------+
+                                                                                            | + execute()            |
+      in these situations we can use "Command" instead of memento!                          | + unexecute()          |
+      every command know how to undo itself                                                 +------------------------+
+      (break entire obj to his commands)
+      like our video can resize, we have resize command
+      for undo we just can store the original dimension of the video
+      (not entire video obj)
+
+    +------------------------+
+    |        Command         |
+    |     <<interface>>      |
+    +------------------------+
+    | + execute()            |
+    +------------------------+
+                ^
+                |
+                | extends
+                |
+    +------------------------+
+    |    UndoableCommand     |
+    |     <<interface>>      |
+    +------------------------+
+    | + unexecute()          |
+    +------------------------+
+                ^                 +---------------------------+
+                |                 |         Document          |
+                |                 +---------------------------+
+                |                 | + makeBold()              |
+                |                 +---------------------------+
+                |                           ^
+                |implement                  |
+                |                           |
+      +---------------------------+         |
+      |       BoldCommand         |---------+
+      +---------------------------+
+      | - prevContent : String    |
+      +---------------------------+
+      | + execute()               |
+      | + unexecute()             |
+      +---------------------------+
+                    |
+                    |
+                    v
+      +---------------------------+         +---------------------------+
+      |         History           | <-------|       UndoCommand         |
+      +---------------------------+         +---------------------------+
+      |                           |         | + execute()               |
+      +---------------------------+         +---------------------------+
+
+
+Summary: instead take snapshot of entire obj
+         store history of commands
+         so we can develop undo mechanism (like memento) on these smaller part
+         (each commands)
+

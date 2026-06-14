@@ -1,0 +1,10 @@
+if we use just classes, our classes will so coupled (depend on each others)
+Interface created to remove these coupling
+if a class1 need class2 obj,
+we create a filed on class1 based on class2 obj type as "dependency" on class2.
+we create class2 obj on main and inject it to class1 as "dependency injection"
+
+Note: in framework like Spring
+      in Service & Controller classes that needs other class obj (depend on them)
+      Spring will inject dependencies automatically (by Beans)
+

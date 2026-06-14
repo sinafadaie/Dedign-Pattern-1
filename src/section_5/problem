@@ -1,0 +1,19 @@
+we want to build a web browser,
+we need concept of history (we need back button)
+
+so we have implemented BrowsHistory class, and a list(urls)
+to store history!
+we want to iterate over these url we visited,
+we use a getter, and for loop on main
+
+BUT!
+if we decide use another datastructures instead List
+(like we want to use fix size String  array to store just 10 past url)
+we will have some errors on state.Exersize.Main class
+(arrays haven't size/get/...)
+in real application, when we modify a class we should prevent
+generate errors on another classes
+(it's ok we have error on BrowsHistory, but it's not ok on state.Exersize.Main!)
+
+CHANGING THE INTERNALS OF AN OBJ SHOULD NOT
+EFFECT ON CONSUMERS!

@@ -1,0 +1,51 @@
+VISITOR pattern allows us to add new operations to an obj structure
+without modifying it.
+
+we can break our HtmlNode Interface, to some smaller Interfaces
+(HtmlNode Interface & Operation Interface)
+Operation Interface that represent all operations (prev methods on HtmlNode Interface)
+we use "overloading" to implementing each operation on different obj
+can be a separate class
+by this if we want to add new operation, we just create new class
+and we don't need to modify old ones!
+
+Note: we use this when our object structure is stable! (but we need new operations frequently)
+      if we add new entity (like new node on our Html)
+      we need modify all implementation (add new overload to all of them)
+      (we have some method on Operation(Visitor) Interface based on number of our entity)
+      in HTML document we just have "LIMITED" node (20 to 30 type of nodes)
+      but quit often we need to support new type of operations
+      so Visitor pattern is great    !
+
+
+GOF:
+                    <<interface>>                                  <<interface>>
+              +---------------------------+                  +---------------------------+
+              |         Element           |                  |          Visitor          |
+              |(like HtmlDocument class)  |                  |(like Operation Interface) |
+              +---------------------------+ ---------------> +---------------------------+
+              | + accept(visitor)         |                  | + visit(ConcreteElementA) |
+              |(like execute() method)    |                  | + visit(ConcreteElementB) |
+              +---------------------------+                  +---------------------------+
+                          ^
+                          |
+             +------------+------------+
+             |                         |
+             |                         |
++---------------------------+   +---------------------------+
+|     ConcreteElementA      |   |     ConcreteElementB      |
+|(like HighlightOperation)  |   |(like PlaintextOperation)  |
++---------------------------+   +---------------------------+
+| + accept(visitor)         |   | + accept(visitor)         |
++---------------------------+   +---------------------------+
+
+ConcreteElementA.accept(visitor):
+    visitor.visit(this);
+
+ConcreteElementB.accept(visitor):
+    visitor.visit(this);
+
+Note: Visitor interface contain some overload based on our entity
+      so each visitor class has the ability to visit all classes!
+
+

@@ -1,0 +1,21 @@
+we have a banking application!
+we want to record all user activities by an "audit trail" (log them all)
+every time the user performs a task
+we should record who did? what did? when did?
+by an audit trail
+
+imagine we have just two different tasks
+(they are different task, so they are different classes (open closed principle))
+1.transfer money
+2.generate financial report
+we will "inject" an audit obj to these class
+and use it to make some log!
+
+problem1: our code is some how duplicate!
+          in each task, we inject audit obj by constructor
+          in each task we call "record()"
+
+problem2: nobody force to use this log pattern on new task
+          it is highly possible some new developer
+          develop new tsk without any audit!
+

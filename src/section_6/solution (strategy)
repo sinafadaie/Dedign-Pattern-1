@@ -1,0 +1,59 @@
+we can use Interface and polymorphism to resolve this if/else statement
+and extract these implementation to some where else!
+
+                    +----------------------+
+                    |       Context        |
+                    +----------------------+
+                    | - strategy           |
+                    +----------------------+
+                    |                      |
+                    +----------------------+
+                               ◆
+                               |
+                               |
+                               |
+                               v
+                           <<interface>>
+                     +----------------------+
+                     |       Strategy       |
+                     +----------------------+
+                     |                      |
+                     +----------------------+
+                                ^
+                                |
+                 +--------------+--------------+
+                 |                             |
+     +--------------------------+  +--------------------------+
+     |    ConcreteStrategyA     |  |    ConcreteStrategyB     |
+     +--------------------------+  +--------------------------+
+     |                          |  |                          |
+     +--------------------------+  +--------------------------+
+
+
+Note: on GOF set name "strategy" that represent the algorithm
+      an algorithm to compressing
+      an algorithm to filtering
+
+Note: with this design
+      we will respect on open close principle
+
+Note: this pattern is so similar to "State" pattern
+      we use both these patterns to change the behavior of an obj
+
+      in state pattern
+      we use it to change canvas behavior based on tool
+      (our main class change his behavior
+      he had different states, so we need "state field" on it)
+
+      but in strategy pattern
+      our main class just want to store images
+      he hadn't states
+      he just need different strategies
+      he need them simultaneously
+      (** we can't define state field **)
+
+summary: sometime we have so many if/else statements
+         ** but these conditions are not refer to our obj state **,
+         it's refer to our requirements (we want to compress image in our ImageStorage class
+                                         but our compress algorithm is different based on image format)
+         in this situation we can use strategy pattern

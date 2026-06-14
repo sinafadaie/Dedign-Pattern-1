@@ -1,0 +1,93 @@
+we should use POLYMORPHISM again!
+we just need a List on DataSource to store our target obj
+(we have polymorphism here, a list to store SpreadSheet,Chart,...)
+
+we need some functionality like
+add/remove/iterate on this list
+if we implement it on DataSource class, we violate "single responsibility concept"
+so we need separate class for this
+we put these logics on abstract class as "SUBJECT"
+and extend our DataSource class to Subject class to inherit these functionalities
+
+each observer should know how to update themselves
+so they have update()
+we notify() them from setter
+and they update themselves!
+
+Note: Observer pattern sometimes called "publish subscribe" pattern
+      because subject class play the role of a publisher
+      it publishes changes in its state,
+      and observers are subscribers to those event
+
+
+    <<abstract class>>                                    <<interface>>
++---------------------------+ <>------------------> +---------------------------+
+|          Subject          |                       |         Observer          |
++---------------------------+                       +---------------------------+
+| + attach(obs)             |                       | + update()               |
+| + detach(obs)             |                       +---------------------------+
+| + notify()                |                                   ^
++---------------------------+                                   |
+            ^                                                   |
+            |                                                   |
++---------------------------+                       +---------------------------+
+|      ConcreteSubject      |                       |     ConcreteObserver      |       Note:  by Observer Interface
++---------------------------+                       +---------------------------+              we can make respect on "open close concept"
+| like our DataSource class |                       | like SpreadSheet/Chart    |              if we have new ConcreteObserver to extend our app
++---------------------------+                       +---------------------------+              we don't need any modification on old classes
+                                                                                               we just create one new ConcreteObserver
+
+
+
+COMMUNICATION STYLE
+
+push style
+when we are using update()
+we can pass the new value to update
+
+pull style
+we can put a field to store the reference of the ConcreteSubject (DataSource obj)
+on our ConcreteObserver (SpreadSheet/Chart )
+when we use update, just pull what we need from base DataSource obj
+
+Note: we can use single int primitive like here
+      or entire obj like dataSource obj to communicate
+      if we use push style, later if we add, remove fields
+      we probably need to modify what we pass to update()
+      (sometimes each observer need different values)
+      so pull style is more flexible!
+
+Note: using pull style means we add coupling to system
+      (we add some dependency to our observers class)
+      it's not bad type of coupling!
+      we never have zero coupling!
+
+Note: direction of coupling is important
+      if we have these dependency on DataSource (like fields based on Char,SpreadSheet)
+      it was so bad!
+      if we want to add new observer, we need to modify DataSource too!
+
+
+
+CENNA solution:
+
+my idea was correct,I used Polymorphism too
+but I have one mistake!
+I used "private List<DataSource> allObj" as a DataSource filed
+when we using a field with the current obj type, we are in nested situation
+(Mosh jut simply create separate class (Observer class) for this)
+
+Note: due to using this field with current class field
+      when we are instantiate Chart/Spreadsheet (they are extended to DataSource)
+      Java has to execute DataSource constructor (JAVA doesn't create a new DataSource obj
+                                                  but he has to execute DataSource constructor to
+                                                  initialize DataSource part of these sub classes
+                                                  for this we add default constructor on Datasource
+                                                  or we could add super() on subclass constructor)
+Note: I put for loop on setter,
+      it means, if we had multiple fields to observe
+      we should repeat this loop on every setter!
+
+Summary: sometimes one obj is source of another objects
+         so if we modify source, we need notify other objects
+         we can use "polymorphism" to store all related obj on a list

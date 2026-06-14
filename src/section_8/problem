@@ -1,0 +1,14 @@
+we want to design a graphical user interface framework.
+so other developers can use our framework to build application
+with a graphical user interface.
+we have classes like Button/checkBox/TextBox in our framework
+
+so developers can use these classes to build
+complex dialog boxes.
+
+problem: the code on the click() method (on button class)
+         should write based on where we use this button!
+         we could use this button click to save some thing,
+         we could use this button click to delete a record!
+         so at the time of designing this framework
+         we don't know what code should be executed when we click a button?

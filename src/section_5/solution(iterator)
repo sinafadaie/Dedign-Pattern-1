@@ -1,0 +1,51 @@
+we need a few new methods that allow us to iterate history obj
+without knowing it's internal representation.
+next()/current()/hasNext()
+by these methods we can iterate without using behind structure!
+
+but this approach make violate "Single Responsibility Principle"
+(iterate methods is not BrowsHistory class responsibility!)
+so we use different class to handle this responsibility.(like iterator class)
+what we did in advance java course (collection: iterable interface 3)
+
+so as we said, tomorrow we replace the list with an array,
+our iterator should know how to iterate over an array,
+so technically, this iterator should be an "INTERFACE" that determines
+the capabilities we need from a real or concrete iterator.
+(createIterator() method create ListIterator/ArrayIterator obj
+ if we change structure, we just need modify BrowseHistory
+ state.Exersize.Main just see createIterator() method from out side!)
+
++-------------------+                  <<interface>>
+|   BrowseHistory   |              +-------------------+
++-------------------+              |     Iterator      |
+| + push(url)       |              +-------------------+
+| + pop()           |              | + next()          |
+| + createIterator()|              | + current()       |
++-------------------+              | + isDone()        |
+                                   +-------------------+
+                                            ^
+                                            |
+                         +------------------+------------------+
+                         |                                     |
+                         |                                     |
+              +-------------------+                 +-------------------+
+              |   ListIterator    |                 |   ArrayIterator   |
+              +-------------------+                 +-------------------+
+              | implements        |                 | implements        |
+              | Iterator          |                 | Iterator          |
+              +-------------------+                 +-------------------+
+
+
+Note: An ArrayList usually uses an internal array.
+      If that internal array becomes full
+      it creates a larger array
+      copies the old elements into the new array
+      then continues using the new one
+      So the dynamic resizing is not free.
+      In Java an array can store primitive types directly
+      but ArrayList just stores objs!
+
+summary: when we create an obj that we expect to iterate on it
+         we should hide iteration tools by this pattern.
+         the user should not know how we iterate on this obj

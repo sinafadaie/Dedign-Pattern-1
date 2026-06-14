@@ -1,0 +1,26 @@
+Imagine we are design a form on a website,
+if all fields filled correctly, the save or submit button turn enable.
+we have a dialog box (like a window to login, to get confirm from user,...)
+or a form with a bunch of input fields that need to collaborate
+but how we can handle this?
+
+we have some functionalities on UI (like button/ListBox/TextBox/...)
+they have some same responsibility so we put them on (UIController class)
+we can generate some dialogBox
+(every dialogBox need UI functionalities!)
+
+we are designing a reusable GUI framework
+(GUI = Graphical User Interface)
+that support Button,ListBox,TextBox
+these classes have some same responsibility we put them on UIControl class!
+we need an entity as DialogBox to use these UI functionality
+
+problem: in this GUI framework,
+         we need objs talk to each other!
+         when we select an item in a listBox
+         our textBox should get populated with the title of the article   (we are developing article DialogBox
+         and save button should become enable                              a dialog box to edit articles)
+         but we have not access to these source code
+         even we have, we can't modify it! (framework code)
+         (these collaboration and interaction can vary from
+         one dialog box to another we can't do that on framework!)

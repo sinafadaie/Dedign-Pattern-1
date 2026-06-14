@@ -1,0 +1,64 @@
+forwarding actual code to another obj by POLYMORPHISM,
+we should decouple Button class (Invoker)
+from the code we want to write  (by Command interface)
+
+Note: POLYMORPHISM is so fucking useful!
+
+Note: use "Command" name at the end of the
+      classes that implement our interface is conventional
+      like "AddCustomerCommand"
+
+Note: "Receiver" is the place we write actual code
+       like a service class
+       we use these service on our concrete class
+       (the class that will implement our interface)
+
+Note: I use argument to use POLYMORPHISM
+      Mosh use constructor to use POLYMORPHISM
+      it's not has difference!
+
+Note: Mosh separate framework class
+      and developer class
+      by fx package
+
+
+GOF:
++------------------------+              <<interface>>
+|        Invoker         |<>----------> +------------------------+
++------------------------+              |        Command         |
+|                        |              +------------------------+
++------------------------+              | + execute()            |
+                                        +------------------------+
+                                                   ^
+                                                   |
+                                                   |
++------------------------+              +------------------------+
+|        Receiver        |              |    ConcreteCommand     |
++------------------------+ <----------- +------------------------+
+|                        |              |                        |
++------------------------+              +------------------------+
+
+
+
+in many Frameworks:
++------------------------+              <<interface>>
+|        BUTTON          |<>----------> +------------------------+
++------------------------+              |        COMMAND         |
+|                        |              +------------------------+
++------------------------+              | + execute()            |
+                                        +------------------------+
+                                                   ^                        FRAMEWORK
+.......border..................border..............|..................................
+                                                   |                        APPLICATION
++------------------------+              +------------------------+
+|    CustomerService     |              |    AddCustomerCommand  |
++------------------------+ <----------- +------------------------+
+|                        |              |                        |
++------------------------+              +------------------------+
+
+
+summary: sometimes our obj (like button class obj)
+         behavior is depend on what we are going to be developed
+         in this situation, we can't use a concrete code on our class
+         we can forwarding actual code to another obj
+         by POLYMORPHISM.

@@ -1,0 +1,32 @@
+Encapsulation
+we will encapsulate data in each class with access modifier(private/public/...)
+we will encapsulate all data in single obj
+for example instead passing multiple argument to a method
+we encapsulate them on a single obj, and just pass that single obj!
+
+Abstraction
+we don't want to expose our implementation detail!              public void sendEmail() {
+we just make our sendEmail() public,                            connect();
+the other method is private                                     authenticate();
+they are implementation details                                 // Send email
+this is abstraction!                                            disconnect();
+                                                                }
+Inheritance
+inheritance is mechanism that allows us
+to reuse code across our classes!
+
+Polymorphism
+poly means many, morphism means form
+it's basically the ability of an obj to take on many form!
+
+Note: difference between Abstract class and Interface
+      Abstract class: Use when classes share a common base
+      and you want shared state + shared implementation.
+      It can have "fields", "constructors", and both "abstract" and "concrete" methods.
+      A class can extend only one abstract class.
+
+      Interface: Use to define a contract/capability that
+      many unrelated classes can implement.
+      Typically no instance state or constructors (only constants).
+      Supports default/static methods.
+      A class can implement multiple interfaces.

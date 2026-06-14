@@ -1,0 +1,47 @@
+we just create simple Editor class, and add contentHistory
+to track history of our content field!
+
+1.but we have some problem!
+  if we have multiple field to track (like content/tittle/...)
+  we should track them separately!
+  so we need store whole Editor obj in each state for history.
+  List<Editor>
+
+2.in OOP pattern, we should assign this responsibility
+  to another class, we call this class as "Memento" class
+  his duty is just get snap shot on each Editor state.
+
+                                                             Originator Class                                   Memento class
+3.so we create EditorState as "Memento"             +----------------------------------+               +--------------------------+
+  to take snap shot every state                     |              Editor              |               |        EditorState       |
+  but we violate "Single Responsibility Principle"  +----------------------------------+  ◆--------->  +--------------------------+
+  each class should have just one responsible       | - content: String                |               | - content: String        |
+  so we should remove History tracking from         | - prevStates: List<EditorState>  |               +--------------------------+
+  Editor class                                      +----------------------------------+
+
+
+   Originator Class                             Memento class
++-----------------------+                    +-------------------+
+|      Editor           |                    | EditorState       |
++-----------------------+  - - - -- - - - - >+-------------------+
+| content: String       |   dependency(uses) | content: String   |
++-----------------------+                    +-------------------+
+| createState()         |                           ^
+| restore(state)        |                           |
++-----------------------+                           |
+                                                    ◆
+                                        +----------------------------+
+                                        |          History           |
+                                        +----------------------------+
+                                        | states: List               |
+                                        +----------------------------+
+                                        | push(state)                |
+                                        | pop()                      |
+                                        +----------------------------+
+                                             CareTaker Class
+
+Summary: in Memento pattern
+         we need Originator Class as main class
+         we need Memento class as snapshot obj (snapshot from Originator obj)
+         we need CareTaker class to store these snapshot obj
+         and we use it for "undo" concepts

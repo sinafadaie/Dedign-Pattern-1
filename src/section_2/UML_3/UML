@@ -1,0 +1,73 @@
+UML is unified model language that we use to model our systems .
+
++----------------------+                        public class Shape {
+|        Shape         |                            private int positionX;
++----------------------+
+| - positionX: int     |                            public void render() {
++----------------------+                                }
+| + render(): void     |                             }
++----------------------+
+
+ ":" type of the field
+     or type of the obj method returned
+
+ "-" means private
+ "+" means public
+
+Note: find arrow point
+      every where find type, stand there
+      send arrow to where these type come from!
+
+
+Inheritance relationship:
++------------------+                           public class Rectangle extends Shape {
+|      Shape       |                                }
++------------------+
+        ^                                      Note: in UML the inheritance relationship
+        |                                            is indicated by an arrow with an
++------------------+                                 "empty triangle"
+|    Rectangle     |
++------------------+
+
+
+Composition relationship:
++------------------+                           public class Shape {
+|      Shape       |                                private Size size;
++------------------+                           }
+| * size: Size     |
++------------------+                           Note: composite relationship indicated by
+        ◆                                            arrow and diamond(◆)
+        |                                            it means shape class composed or include
+        v                                            size class.
++------------------+                                 in shape class we have field of type size!
+|       Size       |
++------------------+                           Note: we have aggregation relationship on UML
+                                                     that is so similar to Composition relationship
+                                                     so we keep simple!
+
+Dependency relationship:
++----------------------+                      public class Shape {
+|        Shape         |                            public void render(Document doc) {
++----------------------+                       }
+|  render(document)    |
++----------------------+
+           .                                  Note: it is indicated by dash arrow
+           .  dependency (uses)                     it means somewhere in the shape class
+           .                                        we have used document class
+           v                                        it's not directly field of our class
++----------------------+                            but exist some where in our class
+|      Document        |                            like as an method argument
++----------------------+                            like local variable on a method
+|                      |
++----------------------+
+
+
+summary:
+        ------------>   INHERITANCE  (solid line)
+
+        ◆-----------►   COMPOSITION  (solid line)
+
+        - - - - - -►   DEPENDENCY
+
+
+

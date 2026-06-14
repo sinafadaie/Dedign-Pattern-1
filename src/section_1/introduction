@@ -1,0 +1,33 @@
+in this course we want to learn how to design
+"reusable" & "extensible" object oriented software.
+
+Design Patterns are "Elegant solutions" to repeating problems.
+like we want to implement undo mechanism,
+that's the repeating problem in software design!
+we have some pattern to implement it,
+like "MEMENTO PATTERN"
+these patterns shows you how to structure your classes
+and how these classes should talk to each other.
+
+in this course we will explore 23 design patterns!
+they documented in th 90s in the book called:
+design patterns (elements of reusable "object-oriented" software)
+By GOF (Gang Of Four) (the book has 4 authors!)
+so it's usual called these 23 patterns as
+"GANG OF FOUR PATTERNS!"
+
+gang of four patterns include 23 design patterns in three categories
+1.Creational  (ways to creat objects)
+2.Structural  (about the relations between these objects)
+3.Behavioural (about interaction or communication between these objects)
+
+Note: we will talk about the "behavioral" design pattern
+      in part 1 of this course.
+      INTERACTION OR COMMUNICATION BETWEEN OUR CLASSES
+      like mediator, observer, memento, strategy,...
+
+Note: understanding design pattern will help us to
+      learn frameworks so quickly!
+      they will be just syntax!
+
+Note: design pattern are so OOP

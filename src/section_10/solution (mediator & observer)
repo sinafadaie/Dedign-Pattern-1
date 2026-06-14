@@ -1,0 +1,46 @@
+our change() on ArticleDialogBox can be so big
+(if number of UIController get increase)
+we can fix this by implementing MEDIATOR pattern by OBSERVER pattern!
+
+
+Cenna:
+we can delete the DialogBox class as mediator (we don't need change() method anymore)
+we want to update ArticleDialogBox (the form,the dialog box!)
+if any of the source obj (like button, listBox, TextBox,...) get change
+so all UIController obj is source (we make UIController as source (as subject))
+and we want to update the dialogBox (ArticleDialogBox is our observer)
+
+problem: I make ArticleDialogBox as observer (implement observer interface)
+         and each UIController as source (multiple source)
+         I attach ArticleDialogBox on each source notifier. (so if each one has changed
+                                                             ArticleDialogBox get notified)
+         but when we want to Override update method (from observer interface)
+         we need put some if/else to separate these source and make compatible update
+         so it's gonna be same as "change" method (we have no improvement!)
+
+
+Mosh: Mosh solve this problem, by "EVENT BASE" approach
+      he said, when a source has change actually
+      we don't want to notify whole ArticleDialogBox obj
+      we just want to notify some method of ArticleDialogBox (like articleSelected/titleChanged)
+      so instead adding ArticleDialogBox obj as observer to the source
+      we add exact method as observer to the source  (if ListBox (ArticleListBox) has change
+                                                      we want to execute articleSelected() of mediator:
+                                                      ** articlesListBox.attach(()->articleSelected()); **
+                                                      )
+
+
+summary: by making an method (event) as observer (instead of whole mediator obj)
+         we can remove conditions to separate event on mediator
+         it's what we call EVENT HANDLER"
+         in many GUI framework use this concept
+         (observer interface has the name of "EventHandler")
+
+
+
+
+
+
+
+
+

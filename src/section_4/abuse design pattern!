@@ -1,0 +1,33 @@
+some time design pattern get miss used,
+every pattern has a context, a specific problem to solve!
+if you just blindly apply these pattern you just increase complexity
+without any improvement!
+we called it "Design Smell" in Application.(Application with overly complicated design)
+Just understand problem, and understand design pattern how solve it!
+
+
+Example
+we have a stopwatch class (has a button to strat/stop):
+public void click(){
+    if (isRunning){
+        isRunning = false;
+        System.out.println("Stopped");
+    } else{
+        isRunning = true;
+        System.out.println("Running");
+    }
+}
+
+
+
+we may think, the click method is behaving differently
+"depending on the state of the stopwatch"
+so that is the case for State Pattern
+(see abuse package!)
+
+Note: our if/els statement on stopwatch class
+      was so simple. if we have a few decision making branches in a method
+      we don't need Sate pattern!
+      (and we know stopwatch is not going t have new state in future!
+       click method just for stop and run the watch
+       we will not have extension)

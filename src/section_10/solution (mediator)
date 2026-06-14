@@ -1,0 +1,66 @@
+Bad practice:
+solving problem by INHERITANCE
+it's true the relationship between button, TextBox, ListBox can be different over projects,
+but we can create child class over button, TextBox, ListBox like ArticleButton, ArticleTextBox, ArticleListBox
+and put our specific relationship on these new classes!
+(like when we select an article ArticleListBox, we put some code on ArticleButton class to enable button)
+
+so we need some method like "changed()" on all these classes
+and when do something on ArticleListBox (like selecting our article on ArticleDialogBox)
+ArticleListBox obj call his changed() to tell ArticleButton to enable button
+                                      to tell ArticleTextBox set new title
+
+this solution create highly coupled classes                                 +-----------------------+                         +-------------------+
+and when our dialog box get more complicated (use many UI functionalities)  |    ArticlesListBox    |-----------------------> |   TitleTextBox    |
+these relationships will be so messy!                                       |-----------------------|                         |-------------------|
+we spread the logic all over the place!                                     |       changed()       |                         |     changed()     |
+                                                                            +-----------------------+                         +-------------------+
+                                                                                       |                                                ^  |
+                                                                                       |                                                |  |
+                                                                                       v                                                |  |
+                                                                                 +-------------------+ ---------------------------------+  |
+                                                                                 |    SaveButton     |<------------------------------------+
+                                                                                 |-------------------|
+                                                                                 |     clicked()     |
+                                                                                 +-------------------+
+
+
+Best practice
+we can use a class as MEDIATOR (vaset)                           +-------------------+                              +-------------------+
+a class that stand at middle of these classes,                   |      ListBox      |                              |      TextBox      |
+and manage these communications                                  |-------------------|                              |-------------------|
+so we can put all logic on a single places                       |                   |                              |                   |
+instead of inheritance we should use "POLYMORPHISM"              +-------------------+                              +-------------------+
+to transfer all obj to this mediator class                                  \                                               /
+                                                                             \                                             /
+we use DialogBox as this mediator                                             \                                           /
+instead spread "changed()" all over classes                                     --------->+-------------------+ <---------
+we just implement it on DialogBox!                                                       |     DialogBox     |             +-------------------+
+                                                                                         |-------------------|             |      Button       |
+                                                                                         | changed(control)  | <---------  |-------------------|
+                                                                                         +-------------------+             |                   |
+                                                                                                   ^                       +-------------------+
+                                                                                                   |
+                                                                                                   |
+                                                                                         +-------------------+
+                                                                                         | ArticlesDialogBox |
+                                                                                         |-------------------|
+GOF:                                                                                     | changed(control)  |
+          ABSTRACT CLASS                         INTERFACE                               +-------------------+
+     +---------------------+              +---------------------+
+     |      Mediator       |<-------------|      Colleague      |
+     |---------------------|              |---------------------|
+     | like DialogBox      |              | like UIController   |
+     +---------------------+              +---------------------+
+                ^                                      ^
+                |                                      |
+                |                                      |
+     +---------------------+              +---------------------+
+     | ConcreteMediator    |------------->| ConcreteColleague   |
+     |---------------------|              |---------------------|       Note: these ConcreteColleague classes
+     |like ArticleDialogBox|              | like TextBox        |             are totally decoupled
+     +---------------------+              | like ListBox        |             and they still have communication with each other
+                                          | like Button         |             we convert " n*n " to  " 1*n " relation ship
+                                          +---------------------+             (ArticleDialogBox to these classes)
+
+

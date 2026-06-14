@@ -1,0 +1,22 @@
+the problem is about when we need a pipeline or a chainOfResponsibility of objs
+for processing a request (order is matter)
+
+imagine we have a web server, and we need to deal with the concept of
+an HTTP request.
+we have to do some steps in order like
+at first authenticate,
+then logging,
+then compression (compress the response like JSON,HTML file to reduce size))
+
+if we do all of these on WebServer class we violate Single Responsibility concept
+so we create separate class for each of them (Authenticator, Compressor, Logger)
+and use them on WebServer class.
+
+problem: WebServer is coupled to these classes now
+         we can use interface and inject the dependency to decouple them
+         but the order of these step will be remained hard coded on WebServer!
+         if in future we want to disable logging for a scenario
+         we have to change WebServer class
+
+         if we want to add a new step we need to change WebServer class!
+         violate open close principle!

@@ -1,0 +1,20 @@
+we have an application that store the images
+that our users upload.
+
+when we want to store an image
+we want to compress that image first (reduce the size)
+we want to apply filter (images have a common look)
+like black & white filter or high contrast filter
+so we have "compressor" & "filter" field on ImageStorage class
+
+problem1: violating single responsibility principle
+          our ImageStorage class should store images!
+          but now he do filter and compressing
+          (if we implement the method instead simulating filtering and compressing
+           our class will be so big!)
+
+
+problem2: it is difficult to support new compressors or new filters
+          if we want to add new filter, we should come back here
+          and make change in different parts
+          it will be so hard when our class be large!

@@ -1,0 +1,84 @@
+we have two solutions
+
+1.use strategy pattern (use polymorphism)
+  create a class to execute Task (taskExecutor class)
+  create "Task" interface (with two concrete implementations TransferMoney/GenerateReport)
+  use these tasks obj as our strategies
+
+  +---------------------------+      ◆ ------->      +---------------------------+
+  |       TaskExecutor        |                      |           Task            |
+  +---------------------------+                      +---------------------------+
+  | + execute(task)           |                      | + execute()               |
+  +---------------------------+                      +---------------------------+
+                                                                   ^
+                                                                   |
+                                                                   |
+                                              +--------------------+--------------------+
+                                              |                                         |
+                                              |                                         |
+                                              |                                         |
+                                              v                                         v
+                                 +---------------------------+              +---------------------------+
+                                  |      TransferMoney        |              |      GenerateReport       |
+                                 +---------------------------+              +---------------------------+
+                                 |                           |              |                           |
+                                 +---------------------------+              +---------------------------+
+
+
+
+2.use Template pattern (use inheritance)
+  implement our duplicate logic on parent class
+  and make our classes inherit them
+  by this we implement it just once
+
+GOF:
+                  +----------------------------------+
+                  |        AbstractClass            |
+                  +----------------------------------+
+                  | + templateMethod()              |     our templateMethod() (execute())
+                  | # primitiveOperation1()         |     is not abstract, it has implementation
+                  | # primitiveOperation2()         |     and called other abstract methods
+                  +----------------------------------+
+                                  ^                       #: means they are abstract method
+                                  |
+                                  |
+                  +----------------------------------+
+                  |        ConcreteClass            |
+                  +----------------------------------+
+                  | + primitiveOperation1()         |
+                  | + primitiveOperation2()         |
+                  +----------------------------------+
+
+
+Note: by the way, we don't necessarily need to make these methods abstract
+      we can give them a default implementation,
+      and leave it up to the subclasses to determine if they
+      want to override those methods or not!!
+      in that case we refer to these methods as "HOOKs"
+      ("HOOK methods" is very common technic on a lot of framework)
+      Why is it called a hook?
+      Because it acts like a hook or attachment point
+      that the framework provides,
+      so you can plug in your own code there. (means if you want,
+                                               you can override by your code)
+
+                        +----------------------------------+
+                        |        AbstractClass            |
+                        +----------------------------------+
+                        | + templateMethod()              |
+                        | + primitiveOperation1()         |
+                        | + primitiveOperation2()         |
+                        +----------------------------------+
+                                        ^
+                                        |
+                                        |
+                        +----------------------------------+
+                        |        ConcreteClass            |
+                        +----------------------------------+
+                        | + primitiveOperation1()         |
+                        | + primitiveOperation2()         |
+                        +----------------------------------+
+
+Summary: when we have duplicate logic
+         we can implement it once in a parent class (like a template)
+         and inherit it by subclasses

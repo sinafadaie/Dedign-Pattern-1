@@ -1,0 +1,17 @@
+som times we need a specific command that
+created based on other commands
+imaging we have a button to record all we have done.
+or in photoshop we have an item that add a wood frame on whatever we use
+(use command on another command)
+this command needs to store other commands.
+
+
+for this we can simply use List!
+we implement a record button on photoshop app in "compositeCommand" package
+when customer press these button
+we will store what command he done
+and he can reuse them later!
+
+summary: we can have a command
+         based on another commands!
+         so we should use List

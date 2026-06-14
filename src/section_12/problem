@@ -1,0 +1,39 @@
+imagine we have a HTML document (HTML page)
+with two nodes (each tag is a node, header is a node, anchor is a node,...)
+
+in this HtmlDocument class we use some nodes (like header,anchor,... classes)
+these nodes are under the HtmlNode Interface
+
+problem: tomorrow we want to introduce a new operation in this object structure (new method on Interface)
+         perhaps we want to convert an HTML document to plain text. (like a method to just extract text on each node)
+         so we should add some method like plainText() on HtmlNode Interface
+         and implement it on every classes under the Interface!
+         and even the HtmlDocument class (like we need to put some new loop)
+         this violate open close concept!
+         we want to add new operation to an object structure, without modifying it!
+
+problem: by designing Interface like this,
+         we spread logics over multiple classes!
+         we implement logic related to "highlight"
+         on HeadingNode & AnchorNode (we can isolate the logic on specific place)
+         (it's not always problem, it's purpose of interface!)
+
+         NOW:
+
+         +---------------------------+                         <<interface>>
+         |       HtmlDocument        |<>-------------> +---------------------------+
+         +---------------------------+                 |         HtmlNode          |
+         | + highlight()             |                 +---------------------------+
+         | + plainText()             |                 | + highlight()            |
+         +---------------------------+                 | + plainText()            |
+                                                       +---------------------------+
+                                                                    ^
+                                                                    |
+                                                      +-------------+-------------+
+                                                      |                           |
+                                                      |                           |
+                                       +---------------------------+   +---------------------------+
+                                       |       HeadingNode         |   |        AnchorNode         |
+                                       +---------------------------+   +---------------------------+
+                                       |                           |   |                           |
+                                       +---------------------------+   +---------------------------+

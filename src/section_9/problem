@@ -1,0 +1,9 @@
+we have an obj, we want to notify some other obj
+if our obj is modified!
+imagine we have "DataSource class" that have field like value
+if value get change
+some other obj like SpreadSheet obj & Chart obj
+should notify and get update.
+
+Note: the number of spreadsheet and charts is unknown
+      and can change in runtime

@@ -1,0 +1,59 @@
+Im genius! we should use polymorphism
+even we choose same name!
+
+                            +------------------------+      ◆----------------------->    +----------------------+
+                            |         Canvas         |                                   |         Tool         |
+                            +------------------------+                                   +----------------------+
+                            | - currentTool          |                                   | + mouseDown()        |
+                            +------------------------+                                   | + mouseUp()          |
+                            | + mouseDown()          |                                   +----------------------+
+                            | + mouseUp()            |                                             ^
+                            +------------------------+                                             |
+                                                                                                   |
+                                                                                 +-----------------+-----------------+
+                                                                                 |                                   |
+                                                                     +----------------------+             +----------------------+
+                                                                     |      Selection       |             |        Brush         |
+                                                                     +----------------------+             +----------------------+
+                                                                     | + mouseDown()        |             | + mouseDown()        |
+                                                                     | + mouseUp()          |             | + mouseUp()          |
+                                                                     +----------------------+             +----------------------+
+
+Note: it called State pattern because
+      state pattern allows an obj to behave
+      differently when state changes!
+
+
+GANG OF FOUR state pattern:
+
+                            +--------------------+      ◆----------------------->   +--------------------+
+                            |      Context       |                                  |        State       |
+                            +--------------------+                                  +--------------------+
+                            | + request()        |                                  | + handle()         |
+                            +--------------------+                                  +--------------------+
+                                                                                           ^
+                                                                                           |
+                                                                     +---------------------+---------------------+
+                                                                     |                                           |
+                                                       +--------------------------+               +--------------------------+
+                                                       |     ConcreteStateA       |               |     ConcreteStateB       |
+                                                       +--------------------------+               +--------------------------+
+                                                       | + handle()               |               | + handle()               |
+                                                       +--------------------------+               +--------------------------+
+
+
+
+summary:  The State pattern is used when an object’s behavior changes based on its current internal state,
+          and you want to avoid large if/else or switch statements by moving each state’s behavior into separate classes.
+          An Order can be in states like:
+          Pending/Paid/Shipped/Cancelled
+          Each state may allow or prevent different actions.
+          **
+             we break that obj into separate class
+             and put them under a parent interface/abstract class
+             and use polymorphism
+          **
+
+          if (state == "PAID") ...
+          else if (state == "SHIPPED") ...
+          else if (state == "CANCELLED") ...

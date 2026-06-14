@@ -1,0 +1,39 @@
+Read State package
+
+some times we have to write duplicate logic!
+like we want to develop photoshop app, we have a pallet of tools on left side
+and our canvas behave differently (canvas is class to provides a drawing surface)
+if we use different tools (it turn to brush, eraser, selector,...)
+
+so our canvas obj will response to mouse event like
+press and release mouse button
+this action do something based on selected tools
+so we need a long If/Else or Case/When statement on it!
+and we need repeat these conditions all over the App
+(like long conditions we have in shadab)
+
+    public void mouseDown(){
+        if(currentTool == ToolType.SELECTION)
+            System.out.println("selection icon");
+        else if (currentTool == ToolType.BRUSH)
+            System.out.println("brush icon");
+        else if (currentTool == ToolType.ERASER)
+            System.out.println("eraser icon");
+    }
+
+    public void mouseUp(){
+        if(currentTool == ToolType.SELECTION)
+            System.out.println("draw dashed rectangle");
+        else if (currentTool == ToolType.BRUSH)
+            System.out.println("draw a line");
+        else if (currentTool == ToolType.ERASER)
+            System.out.println("eraser something");
+    }
+
+
+Note: in real draw application we have more tool (longer conditions)
+      more actions (more methods)
+      so this approach is not "maintainable"
+      we have lack of "extensibility" (if we add a tool, we should change all conditions!)
+      so we have to develop a canvas method some how not depend on tool!
+      we can use OOP to solve this problem!

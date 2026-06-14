@@ -1,0 +1,193 @@
+MEMENTO
+
+Problem:
+Need to save and restore an object’s previous state without exposing its internals.
+like implementing undo on a word sheet
+
+Core idea:
+Store snapshots of state in separate memento objects.
+
+Roles:
+Originator
+Memento    class to snapshot
+Caretaker  class to store snapshots on list
+
+When not to use:
+When state is large, restoration is rarely needed, or snapshotting is too expensive.
+in this situation we use command pattern (break obj to it's commands
+                                          and use memento on each commands)
+
+-------------------------------------------
+ITERATOR
+
+Problem:
+Need to traverse a collection without exposing its internal structure.
+we have an iterable obj but we don't know he is list,map,...
+
+Core idea:
+Move traversal logic into a separate iterator object.
+
+Roles:
+Iterator,
+ConcreteIterator,  inner class that return iterator obj
+Aggregate / Collection
+
+When not to use:
+When simple loops are enough or traversal logic is trivial.
+
+--------------------------------------------
+Chain of Responsibility
+like a pipeline to authenticate, login, ... user on a website
+
+Problem:
+Need to pass a request through multiple handlers until one handles it.
+
+Core idea:
+Link handlers in a chain; each one decides to handle or forward.
+it's like use link list on some classes
+
+Roles:
+Handler,            abstract class to implement link connection
+ConcreteHandler,    sub class to implement each steps
+Client
+
+When not to use:
+When the receiver is always known or the chain adds unnecessary complexity.
+
+--------------------------------------------
+Observer
+
+Problem:
+Need to notify multiple objects automatically when one object changes.
+like charts,sheets,... based on another source obj
+
+Core idea:
+Subject keeps a list of observers and notifies them on change.
+
+Roles:
+Subject,            a class that know how add,remove observers on list to track
+Observer,           an Interface to match observers classes
+ConcreteSubject,    our source class
+ConcreteObserver    our observer classes
+
+When not to use:
+When updates are simple, tightly controlled, or too many notifications would cause issues.
+
+-------------------------------------------
+Mediator
+
+Problem:
+Many objects communicate in messy, tightly coupled ways.
+like a complex form (each parts need communicate each-others)
+
+Core idea:
+Centralize communication through a mediator.
+
+Roles:
+Mediator,           abstract class that define mediator
+ConcreteMediator,   the class that stand at the middle
+Colleague           who communicate to mediator
+
+When not to use:
+When interactions are simple and a mediator would become unnecessary overhead.
+
+Note: we can implement mediator by observer
+      in this situation we set mediator's methods as observer
+      we call it EVENT HANDLER
+
+-----------------------------------------
+Command
+
+Problem:
+Need to turn requests into objects so they can be queued, logged, undone, or executed later.
+like button action
+
+Core idea:
+Wrap an action and its receiver inside a command object.
+
+Roles:
+Command,            an Interface that defines commands
+ConcreteCommand,    each commands, like button to addCustomer/ button to remove Customer
+Invoker,
+Receiver,           where we have actual code (like customerService that can add customer)
+Client
+
+When not to use:
+When actions are very simple and objectifying them adds too much boilerplate.
+
+-----------------------------------------
+Strategy
+
+Problem:
+Need different interchangeable algorithms for the same task.
+like different algorithms to compress videos!
+it's like state (we have so many if/else), but context class has not different states!
+
+Core idea:
+Encapsulate each algorithm behind a common interface.
+
+Roles:
+Strategy,           each purpose has his interface (an interface to compress videos)
+ConcreteStrategy,   we have multiple class to implement each algorithm (jpg/png/...)
+Context             the class use these strategies (like ImageStorage)
+
+When not to use:
+When there are only one or two simple variants and extra abstraction is unnecessary.
+
+-------------------------------------------
+Template Method
+
+Problem:
+Need a fixed algorithm structure with some customizable steps.
+like store log on every customer operations (transfer money/ generate report/...)
+
+Core idea:
+Define the skeleton in a base class and let subclasses override specific steps.
+
+Roles:
+AbstractClass,  like Task class (all customer operations is kind of task)
+ConcreteClass
+
+When not to use:
+When inheritance is not wanted or behavior should vary at runtime.
+
+------------------------------------------
+State
+
+Problem:
+An object behaves differently depending on its current state.
+like Tool on photoshop (we have many if/else)
+
+Core idea:
+Move state-specific behavior into separate state objects.
+
+Roles:
+Context,         where we use tools (canvas class)
+State,           like Tool interface
+ConcreteState    like each tools
+
+When not to use:
+When there are only a few simple conditions and separate state classes would be overkill.
+
+------------------------------------------
+Visitor
+
+Problem:
+Need to add new operations to a group of object types without changing their classes.
+(like we have an Interface, if we want to add new method, we should modify all classes
+ we want to prevent this)
+
+Core idea:
+Move the operation into a visitor object and let each element accept it.
+instead we have multiple method on our base Interface, we make it singular (accept all operations by polymorphism)
+we create another interface to cover these operations by overloading (visitor)
+
+Roles:
+Visitor,           (an Interface that has some overload method to cover all classes)
+ConcreteVisitor,   (class that implement overload methods (visit other classes))
+Element,           (the main class like HtmlDocument )
+ConcreteElement
+
+When not to use:
+When the element hierarchy changes often, because every new element affects all visitors.
+(we have stable object structure)
